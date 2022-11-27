@@ -1,20 +1,26 @@
 import React, { Component } from "react";
 import css from "./App.module.css";
-import { nanoid } from "nanoid";
 import ContactForm from "./Components/ContactForm/ContactForm";
 import Filter from "./Components/Filter/Filter";
 import ContactList from "./Components/ContactList/ContactList";
 
 class App extends Component {
 	state = {
-		contacts: [
-			{ id: nanoid(), name: "Rosie Simpson", number: "459-12-56" },
-			{ id: nanoid(), name: "Hermione Kline", number: "443-89-12" },
-			{ id: nanoid(), name: "Eden Clements", number: "645-17-79" },
-			{ id: nanoid(), name: "Annie Copeland", number: "227-91-26" },
-		],
+		contacts: [],
 		filter: "",
 	};
+
+	KEY = "Contacts";
+
+	componentDidMount() {
+		const savedContacts = JSON.parse(localStorage.getItem(this.KEY));
+		savedContacts && this.setState({ contacts: savedContacts });
+	}
+
+	componentDidUpdate() {
+		const { contacts } = this.state;
+		localStorage.setItem(this.KEY, JSON.stringify(contacts));
+	}
 
 	checkContact = (newContact) => {
 		const { contacts } = this.state;
