@@ -11,10 +11,6 @@ const INITIAL_STATE = {
 class ContactForm extends Component {
 	state = { ...INITIAL_STATE };
 
-	static propTypes = {
-		onSubmit: PropTypes.func.isRequired,
-	};
-
 	handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -52,5 +48,9 @@ class ContactForm extends Component {
 		);
 	}
 }
+
+ContactForm.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+};
 
 export default ContactForm;
