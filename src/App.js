@@ -4,22 +4,22 @@ import ContactForm from "./Components/ContactForm/ContactForm";
 import Filter from "./Components/Filter/Filter";
 import ContactList from "./Components/ContactList/ContactList";
 
+const KEY = "Contacts";
+
 class App extends Component {
 	state = {
 		contacts: [],
 		filter: "",
 	};
 
-	KEY = "Contacts";
-
 	componentDidMount() {
-		const savedContacts = JSON.parse(localStorage.getItem(this.KEY));
+		const savedContacts = JSON.parse(localStorage.getItem(KEY));
 		savedContacts && this.setState({ contacts: savedContacts });
 	}
 
 	componentDidUpdate() {
 		const { contacts } = this.state;
-		localStorage.setItem(this.KEY, JSON.stringify(contacts));
+		localStorage.setItem(KEY, JSON.stringify(contacts));
 	}
 
 	checkContact = (newContact) => {
@@ -53,10 +53,10 @@ class App extends Component {
 		return (
 			<div className={css["container"]}>
 				<h1>Phonebook</h1>
-				<ContactForm onSubmit={this.addContact}/>
+				<ContactForm onSubmit={this.addContact} />
 
 				<h2>Contacts</h2>
-				<Filter changeHandler={this.changeFilterValue}/>
+				<Filter changeHandler={this.changeFilterValue} />
 				<ContactList
 					filter={this.state.filter}
 					contacts={this.state.contacts}
